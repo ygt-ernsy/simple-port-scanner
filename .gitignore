@@ -1,0 +1,15 @@
+# pythone cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# vscode
+.vscode/
+
+# env files
+.env
+.env.*
+
+# pycharm
+.idea/
