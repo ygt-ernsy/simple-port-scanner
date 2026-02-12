@@ -1,5 +1,4 @@
 import socket
-import argparse
 
 def scan_given_port(ip: str, port: int) -> bool:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -7,6 +6,11 @@ def scan_given_port(ip: str, port: int) -> bool:
         try:
             s.connect((ip, port))
             return True
-        except Exception:
+        except ConnectionRefusedError:
+            return False
+        except socket.timeout:
+            return False
+        except OSError as e:
+            print(f"Error: {e}")
             return False
 
