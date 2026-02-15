@@ -20,7 +20,7 @@ tags:
 - If a port gives a response in a given time then it will be deemed open otherwise closed
     
 
-## What won't it do? (scope limits)
+## What won't it do? 
 
 - Scan for any potential vulnerabilities
     
@@ -29,18 +29,18 @@ tags:
 - Detect the OS
     
 
-## What are the main components? (scanner engine, results storage, output formatter)
+## What are the main components? 
 
 - The layer where the scanning logic resides
     
 - The interface layer where the command line logic will reside and call upon the scanner logic
     
 
-## What do I need to learn? (list unknowns)
+## What do I need to learn? 
 
-- How to actually scan ports in Python (and Golang in the future)
+- How to actually scan ports in Python 
     
-- How to create a simple command line tool in Python (and Golang in the future)
+- How to create a simple command line tool in Python 
     
 - What is a basic ping, a SYN packet and an ARP request
     
