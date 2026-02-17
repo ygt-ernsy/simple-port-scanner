@@ -21,3 +21,10 @@ def scan_given_port(ip: str, port: int) -> bool:
             print(f"Error: {e}")
             return False
 
+
+def scan_given_ip(ip: str):
+    for i in range(65536):
+        if scan_given_port(ip, i):
+            print(f"{ip}:{i} is open")
+
+scan_given_ip('localhost')
