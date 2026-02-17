@@ -1,4 +1,5 @@
 import socket
+from typing import List
 
 def scan_given_port(ip: str, port: int) -> bool:
     ip_used: str
@@ -22,9 +23,9 @@ def scan_given_port(ip: str, port: int) -> bool:
             return False
 
 
-def scan_given_ip(ip: str):
+def scan_given_ip(ip: str) -> List[str]:
+    open_ports: List[str] = []
     for i in range(65536):
         if scan_given_port(ip, i):
-            print(f"{ip}:{i} is open")
-
-scan_given_ip('localhost')
+            open_ports.append(f'{ip}:{i}')
+    return open_ports
