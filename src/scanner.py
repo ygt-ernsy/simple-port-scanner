@@ -24,14 +24,14 @@ def scan_given_port(ip: str, port: int) -> bool:
             return False
 
 
-def scan_given_ip(ip: str) -> List[str]:
+def scan_sequential_ip(ip: str) -> List[str]:
     open_ports: List[str] = []
     for i in range(65536):
         if scan_given_port(ip, i):
             open_ports.append(f'{ip}:{i}')
     return open_ports
 
-def scan_ip(ip: str) -> List[str]:
+def scan_concurent_ip(ip: str) -> List[str]:
     open_ports: List[str] = []
     futures: dict[concurrent.futures.Future, str] = {}
 
