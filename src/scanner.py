@@ -80,7 +80,3 @@ def get_service_banner(ip: str, port: int) -> str:
             pass
 
         return response_msg
-
-
-
-print(get_service_banner('1.1.1.1', 53))
