@@ -1,4 +1,5 @@
 import concurrent.futures
+import re
 import socket
 from typing import List
 
@@ -15,7 +16,11 @@ def scan_given_port(ip: str, port: int) -> bool:
         try:
             s.connect((ip_used, port))
             return True
-        except (socket.timeout, ConnectionRefusedError):
+        except socket.timeout:
+            print('Connection timed out.')
+            return False
+        except  ConnectionRefusedError:
+            print('Connection refused.')
             return False
         except OSError as e:
             print(f"Error: {e}")
@@ -67,11 +72,15 @@ def get_service_banner(ip: str, port: int) -> str:
             except UnicodeDecodeError:
                 response_msg = response.decode('latin-1').strip()
 
-        except (ConnectionRefusedError, socket.timeout):
+        except ConnectionRefusedError:
+            print("Connection refused")
+            pass
+        except socket.timeout:
+            print("Timed out")
             pass
 
         return response_msg
 
 
 
-get_service_banner('localhost', 53)
+print(get_service_banner('1.1.1.1', 53))
