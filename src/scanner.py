@@ -15,9 +15,7 @@ def scan_given_port(ip: str, port: int) -> bool:
         try:
             s.connect((ip_used, port))
             return True
-        except ConnectionRefusedError:
-            return False
-        except socket.timeout:
+        except (socket.timeout, ConnectionRefusedError):
             return False
         except OSError as e:
             print(f"Error: {e}")
@@ -48,3 +46,32 @@ def scan_concurent_ip(ip: str) -> List[str]:
                 print(e)
 
     return open_ports
+
+def get_service_banner(ip: str, port: int) -> str:
+    ip_used: str
+
+    if ip == 'localhost':
+        ip_used = '127.0.0.1'
+    else:
+        ip_used = ip
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(1)
+        response_msg = ''
+        try:
+            s.connect((ip_used, port))
+            response = s.recv(1024)
+
+            try:
+                response_msg = response.decode('utf-8').strip()
+            except UnicodeDecodeError:
+                response_msg = response.decode('latin-1').strip()
+
+        except (ConnectionRefusedError, socket.timeout):
+            pass
+
+        return response_msg
+
+
+
+get_service_banner('localhost', 53)
