@@ -48,3 +48,15 @@ def scan_concurent_ip(ip: str) -> List[str]:
                 print(e)
 
     return open_ports
+
+def get_service_of_port(port: int) -> str:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(1)
+        result = s.connect_ex(('', port))
+
+        if result == 0:
+            try:
+                return socket.getservbyport(port)
+            except OSError:
+                return ''
+    return ''
