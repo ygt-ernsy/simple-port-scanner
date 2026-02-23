@@ -79,3 +79,16 @@ def get_service_banner(ip: str, port: int) -> str:
             pass
 
         return response_msg
+
+def get_service_of_port(port: int) -> str:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(1)
+        result = s.connect_ex(('127.0.0.1', port))
+
+        if result == 0:
+            try:
+                return socket.getservbyport(port)
+            except OSError:
+                print('An error occured, the port might not be in /etc/services')
+                return ''
+    return ''
