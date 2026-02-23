@@ -1,5 +1,4 @@
 import concurrent.futures
-import re
 import socket
 from typing import List
 
