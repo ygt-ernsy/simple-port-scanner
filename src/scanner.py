@@ -16,10 +16,8 @@ def scan_given_port(ip: str, port: int) -> bool:
             s.connect((ip_used, port))
             return True
         except socket.timeout:
-            print('Connection timed out.')
             return False
         except  ConnectionRefusedError:
-            print('Connection refused.')
             return False
         except OSError as e:
             print(f"Error: {e}")
